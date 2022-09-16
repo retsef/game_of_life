@@ -1,0 +1,32 @@
+<div>
+  <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+  <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Change your password</h2>
+</div>
+
+<div class="mt-8">
+  <%= form_for resource, as: resource_name, url: password_path(resource_name), html: { class: 'mt-8 space-y-6', method: :put, 'data-turbo': false } do |f| %>
+    <%= render Form::ErrorMessages::Component.new(resource: resource) %>
+    <%= f.hidden_field :reset_password_token %>
+
+    <div class="field">
+      <%= f.label :password, "New password" %>
+      <div class="mt-1">
+        <%= f.hint :password, "(#{@minimum_password_length} characters minimum)" if @minimum_password_length %>
+        <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+      </div>
+    </div>
+
+    <div class="field space-y-1">
+      <%= f.label :password_confirmation, "Confirm new password" %>
+      <div class="mt-1">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Change my password" %>
+    </div>
+  <% end %>
+
+  <%= render "auth/shared/links" %>
+</div>
