@@ -17,6 +17,9 @@ module GameOfLife
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = 'Rome'
+    config.default_locale = :it_IT
+
     config.eager_load_paths << Rails.root.join("forms")
     config.eager_load_paths << Rails.root.join("services")
   end

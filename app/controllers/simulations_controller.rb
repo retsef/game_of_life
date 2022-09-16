@@ -14,37 +14,29 @@ class SimulationsController < ApplicationController
 
     SimulationJob.perform_now(@simulation)
 
-    flash[:notice] = 'Simulation started'
+    flash[:notice] = t('.success')
   end
 
   def pause
     @simulation.update(running_at: nil)
 
-    flash[:notice] = 'Simulation paused'
+    flash[:notice] = t('.success')
   end
 
   def new; end
 
   def create
-    begin
-      generation = GenerationParser.parse(simulation_params[:generation_source])
+    generation = GenerationParser.parse(simulation_params[:generation_source])
 
-      if generation.update(simulation: @simulation)
-        redirect_to @simulation, notice: 'Simulation was successfully created.'
-      else
-        flash[:alert] = 'Simulation could not be created'
-        render :new
-      end
-    rescue StandardError => _e
-      flash[:alert] = 'Il file inserito non è valido o ha un formato non supportato'
+    if generation.update(simulation: @simulation)
+      redirect_to @simulation, notice: t('.success')
+    else
+      flash[:alert] = t('.error')
       render :new
     end
-  end
-
-  def destroy
-    @simulation.destroy
-
-    redirect_to root_path, notice: 'Simulation was successfully destroyed.'
+  rescue StandardError => _e
+    flash[:alert] = t('.error')
+    render :new
   end
 
   private

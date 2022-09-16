@@ -17,8 +17,8 @@ class SimulationJob < ApplicationJob
 
     # Replace header generation number
     simulation.broadcast_replace_to simulation,
-                                    partial: 'simulations/show_header',
-                                    target: "header_simulation_#{simulation.id}"
+                                    partial: 'simulations/generation_number',
+                                    target: "generation_number_simulation_#{simulation.id}"
 
     SimulationJob.set(wait: 0.5.second).perform_later(simulation)
   end

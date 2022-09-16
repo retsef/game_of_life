@@ -1,0 +1,12 @@
+---
+it:
+  simulations:
+    create:
+      error: 'Il file inserito non è valido o ha un formato non supportato'
+      success: 'File generazione di partenza caricato con successo.'
+
+    start:
+      success: 'Simulazione avviata con successo.'
+
+    pause:
+      success: 'Simulazione sospesa con successo.'

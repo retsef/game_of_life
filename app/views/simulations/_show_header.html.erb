@@ -1,11 +1,19 @@
-<div id="<%= dom_id(simulation, 'header') %>" class="mt-1 md:flex md:items-center md:justify-between">
-  <div id="<%= dom_id(simulation, 'generation_number') %>" class="min-w-0 flex-1">
-    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-      Generation <%= simulation.latest_generation.number %>
-    </h2>
-  </div>
+<div id="<%= dom_id(simulation, 'header') %>">
+  <nav aria-label="Back">
+    <%= link_to new_simulation_path, class: "inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900", target: '_top' do %>
+      <!-- Heroicon name: mini/chevron-left -->
+      <svg class="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+      </svg>
+      Back
+    <% end %>
+  </nav>
 
-  <div id="<%= dom_id(simulation, 'actions') %>" class="mt-4 flex md:mt-0 md:ml-4">
-    <%= render Simulation::Actions::Component.new(simulation) %>
+  <div class="mt-1 md:flex md:items-center md:justify-between">
+    <%= render 'generation_number', simulation: simulation %>
+
+    <div id="<%= dom_id(simulation, 'actions') %>" class="mt-4 flex md:mt-0 md:ml-4">
+      <%= render Simulation::Actions::Component.new(simulation) %>
+    </div>
   </div>
 </div>

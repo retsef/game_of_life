@@ -8,7 +8,24 @@ it:
       cell:
         one: Cellula
         other: Cellule
+      simulation:
+        one: Simulazione
+        other: Simulazioni
+      generation:
+        one: Generazione
+        other: Generazioni
     attributes:
+      simulation:
+        latest_generation: Ultima generazione
+        previous_generation: Penultima generazione
+        generations: Generazioni
+      generation:
+        number: Numero
+        world: Mondo
+        cells: Cellule
+      world:
+        width: Larghezza
+        height: Altezza
       cell:
         x: X
         y: Y
