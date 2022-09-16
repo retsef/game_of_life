@@ -3,6 +3,8 @@ class SimulationJob < ApplicationJob
   queue_as :simulations
 
   def perform(simulation)
+    return unless simulation.running?
+
     old_generation = simulation.latest_generation
     new_generation = simulation.next!
     simulation.touch :latest_run_at
@@ -17,8 +19,6 @@ class SimulationJob < ApplicationJob
     simulation.broadcast_replace_to simulation,
                                     partial: 'simulations/show_header',
                                     target: "header_simulation_#{simulation.id}"
-
-    return unless simulation.running?
 
     SimulationJob.set(wait: 0.5.second).perform_later(simulation)
   end
