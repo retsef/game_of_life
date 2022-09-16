@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: worlds
+#
+#  id            :integer          not null, primary key
+#  generation_id :integer          not null
+#  width         :integer
+#  height        :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+one:
+  generation: one
+  width: 1
+  height: 1
+
+two:
+  generation: two
+  width: 1
+  height: 1

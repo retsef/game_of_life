@@ -1,0 +1,6 @@
+Generation <%= @generation.number %>:
+<%= @generation.world_height %> <%= @generation.world_width %>
+<% @generation.cells.collect {|cell| cell.alive? ? '*' : '.'}
+              .in_groups_of(@generation.world_width).each do |row| %>
+<%= row.join %>
+<% end %>

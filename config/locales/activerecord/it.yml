@@ -1,0 +1,14 @@
+---
+it:
+  activerecord:
+    models:
+      world:
+        one: Mondo
+        other: Mondi
+      cell:
+        one: Cellula
+        other: Cellule
+    attributes:
+      cell:
+        x: X
+        y: Y

@@ -1,0 +1,6 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+<%= turbo_frame_tag dom_id(@simulation, 'generations'), class: "overflow-hidden bg-white shadow sm:rounded-md" do %>
+  <ul role="list" class="divide-y divide-gray-200">
+    <%= render @generations %>
+  </ul>
+<% end %>

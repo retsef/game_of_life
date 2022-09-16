@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: cells
+#
+#  id         :integer          not null, primary key
+#  world_id   :integer          not null
+#  x          :integer
+#  y          :integer
+#  alive      :boolean          default(FALSE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  world: one
+  x: 1
+  'y': 1
+
+two:
+  world: two
+  x: 1
+  'y': 1

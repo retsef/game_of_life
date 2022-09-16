@@ -1,0 +1,32 @@
+<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+  <%= render 'show_header' %>
+
+  <div id="<%= dom_id(@simulation) %>" class="flex my-10">
+    <%= turbo_frame_tag dom_id(@simulation.latest_generation),
+                        src: polymorphic_path([@simulation, @simulation.latest_generation]),
+                        class: 'flex-1' do %>
+      <!-- Placeholder -->
+      <div class="w-full m-auto">
+        <div class="w-auto flex flex-col">
+          <% 10.times do %>
+            <div class="flex flex-row">
+              <% 10.times do %>
+                <div class="animate-pulse w-full aspect-square flex-1 transition-all duration-100 bg-gray-300 rounded-md shadow focus:outline-none"></div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= turbo_frame_tag dom_id(@simulation, 'generations'),
+                        src: polymorphic_path([@simulation, :generations]),
+                        class: 'overflow-hidden bg-white shadow sm:rounded-md' do %>
+      <ul role="list" class="w-full divide-y divide-gray-200">
+        <li class="w-full">Loading</li>
+      </ul>
+    <% end %>
+  </div>
+
+  <%= turbo_stream_from @simulation %>
+</div>

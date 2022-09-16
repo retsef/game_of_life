@@ -1,0 +1,7 @@
+<%= turbo_stream.replace dom_id(@simulation, 'actions') do %>
+  <div id="<%= dom_id(@simulation, 'actions') %>" class="mt-4 flex md:mt-0 md:ml-4">
+    <%= render Simulation::Actions::Component.new(@simulation) %>
+  </div>
+<% end %>
+
+<%= render 'shared/flashes' %>

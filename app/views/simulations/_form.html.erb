@@ -1,0 +1,14 @@
+<%= form_for @simulation, html: { class: 'mt-8 space-y-6' } do |f| %>
+  <%= render Form::ErrorMessages::Component.new(resource: @simulation) %>
+
+  <div>
+    <%= f.label :generation_source %>
+    <div class="mt-1">
+      <%= f.file_field :generation_source %>
+    </div>
+  </div>
+
+  <div>
+    <%= f.submit 'Generate' %>
+  </div>
+<% end %>
