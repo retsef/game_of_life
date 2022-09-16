@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>" class="h-full bg-gray-100">
   <head>
     <title>GameOfLife</title>
+    <meta name="ROBOTS" content="NOODP">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,7 +11,14 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="h-full">
+    <%= render 'shared/navigation' %>
+
+    <!-- Main Content -->
+    <main class="flex-1 py-10 sm:py-6 main-content" role="main">
+      <%= render 'shared/flashes' %>
+
+      <%= yield %>
+    </main>
   </body>
 </html>

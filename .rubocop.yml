@@ -1,0 +1,54 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/GlobalStdStream:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 50
+
+Metrics/BlockLength:
+  Max: 50
+
+Metrics/ClassLength:
+  Max: 180
+  
+Metrics/CyclomaticComplexity:
+  Max: 25
+
+Metrics/PerceivedComplexity:
+  Max: 25
+
+Layout/LineLength:
+  Max: 180
+
+Naming/BlockForwarding:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/RakeEnvironment:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
