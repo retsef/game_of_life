@@ -15,7 +15,7 @@ class GenerationParser
 
     cells = generation_source.scan(/([.,*])/).flatten
 
-    throw FormatInvalidException unless cells.size != (width.to_i * height.to_i)
+    throw FormatInvalidException unless cells.size == (width.to_i * height.to_i)
 
     cells.each_with_index do |cell, index|
       generation.world.cells.build(

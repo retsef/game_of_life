@@ -26,17 +26,19 @@ class SimulationsController < ApplicationController
   def new; end
 
   def create
-    generation = GenerationParser.parse(simulation_params[:generation_source])
+    begin
+      generation = GenerationParser.parse(simulation_params[:generation_source])
 
-    if generation.update(simulation: @simulation)
-      redirect_to @simulation, notice: 'Simulation was successfully created.'
-    else
-      flash[:alert] = 'Simulation could not be created'
+      if generation.update(simulation: @simulation)
+        redirect_to @simulation, notice: 'Simulation was successfully created.'
+      else
+        flash[:alert] = 'Simulation could not be created'
+        render :new
+      end
+    rescue StandardError => _e
+      flash[:alert] = 'Il file inserito non è valido o ha un formato non supportato'
       render :new
     end
-  rescue GenerationParser::FormatInvalidException => _e
-    @simulation.errors << { generation_source: 'is invalid' }
-    render :new
   end
 
   def destroy

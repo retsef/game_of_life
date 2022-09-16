@@ -61,10 +61,7 @@
                data-transition-leave-from="transform opacity-100 scale-100"
                data-transition-leave-to="transform opacity-0 scale-95"
                role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-            <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a href="#" class="block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-
-            <a href="#" class="block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+            <%= link_to 'Sign out', destroy_user_session_path, class: "block py-2 px-4 text-sm text-gray-700", role: "menuitem", tabindex: "-1", data: { "turbo-method": :delete } %>
           </div>
         </div>
 
@@ -79,9 +76,7 @@
         <%= render Navigation::Mobile::UserInfo::Component.new user: current_user %>
       </div>
       <div class="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
-        <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">Settings</a>
-
-        <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">Sign out</a>
+        <%= link_to 'Sign out', destroy_user_session_path, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900", data: { "turbo-method": :delete } %>
       </div>
     </div>
   </nav>
