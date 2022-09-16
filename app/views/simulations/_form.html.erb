@@ -2,10 +2,7 @@
   <%= render Form::ErrorMessages::Component.new(resource: @simulation) %>
 
   <div>
-    <%= f.label :generation_source %>
-    <div class="mt-1">
-      <%= f.file_field :generation_source %>
-    </div>
+    <%= f.file_field :generation_source %>
   </div>
 
   <div>

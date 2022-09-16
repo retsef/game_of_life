@@ -14,8 +14,9 @@ class Cell < ApplicationRecord
   belongs_to :world
   has_one :generation, through: :world
 
-  scope :ordered, -> { order(x: :asc, y: :asc) }
-  scope :neighbors, ->(cell) { where(world: cell.world).where(x: [cell.x - 1, cell.x + 1]).where(y: [cell.y - 1, cell.y + 1]) }
+  scope :ordered, -> { order(y: :asc, x: :asc) }
+  scope :neighbors, lambda { |cell| where(world: cell.world).where.not(id: cell.id)
+                                 .where(x: (cell.x - 1..cell.x + 1), y: (cell.y - 1..cell.y + 1)) }
   scope :alive, -> { where(alive: true) }
   scope :death, -> { where(alive: false) }
 
@@ -39,7 +40,7 @@ class Cell < ApplicationRecord
   # Check if should be death or alive
   def life?
     if alive?
-      return false if neighbors_alive >= 3
+      return false if neighbors_alive > 3
       return true if [2, 3].include? neighbors_alive
       return false if neighbors_alive <= 2
     end

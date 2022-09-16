@@ -9,10 +9,12 @@
 #  updated_at    :datetime         not null
 #
 class Generation < ApplicationRecord
-  FORMAT_REGEX = /Generation \d:\n\d+ \d+\n[.,*,\n]+./i.freeze
-
-  broadcasts
-  # broadcasts_to ->(generation) { "generations_simulation_#{generation.simulation_id}" }, inserts_by: :prepend
+  # Append new generation to the list
+  after_create_commit lambda { |generation|
+    broadcast_prepend_to generation.simulation,
+                        target: "list_generations_simulation_#{generation.simulation_id}",
+                        partial: 'generations/generation'
+  }
 
   belongs_to :simulation, touch: true, counter_cache: true
   has_one :world, dependent: :destroy

@@ -3,6 +3,9 @@ require 'active_support/core_ext/integer/time'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Redirect self for error pages
+  config.exceptions_app = self.routes
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

@@ -1,10 +1,22 @@
-<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-  <%= render 'show_header' %>
+<div class="mx-auto max-w-4xl sm:px-6 lg:px-8">
+  <div>
+    <nav aria-label="Back">
+      <%= link_to new_simulation_path, class: "inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900", target: '_top' do %>
+        <!-- Heroicon name: mini/chevron-left -->
+        <svg class="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+        </svg>
+        Back
+      <% end %>
+    </nav>
+
+    <%= render 'show_header', simulation: @simulation %>
+  </div>
 
   <div id="<%= dom_id(@simulation) %>" class="flex my-10">
     <%= turbo_frame_tag dom_id(@simulation.latest_generation),
                         src: polymorphic_path([@simulation, @simulation.latest_generation]),
-                        class: 'flex-1' do %>
+                        class: 'flex-1 mr-4' do %>
       <!-- Placeholder -->
       <div class="w-full m-auto">
         <div class="w-auto flex flex-col">
@@ -21,8 +33,8 @@
 
     <%= turbo_frame_tag dom_id(@simulation, 'generations'),
                         src: polymorphic_path([@simulation, :generations]),
-                        class: 'overflow-hidden bg-white shadow sm:rounded-md' do %>
-      <ul role="list" class="w-full divide-y divide-gray-200">
+                        class: 'bg-white shadow sm:rounded-md sm:max-h-96' do %>
+      <ul role="list" class="h-full w-full divide-y divide-gray-200">
         <li class="w-full">Loading</li>
       </ul>
     <% end %>

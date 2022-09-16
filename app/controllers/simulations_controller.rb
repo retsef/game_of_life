@@ -26,11 +26,17 @@ class SimulationsController < ApplicationController
   def new; end
 
   def create
-    if @simulation.update(simulation_params)
-      redirect_to @simulation
+    generation = GenerationParser.parse(simulation_params[:generation_source])
+
+    if generation.update(simulation: @simulation)
+      redirect_to @simulation, notice: 'Simulation was successfully created.'
     else
+      flash[:alert] = 'Simulation could not be created'
       render :new
     end
+  rescue GenerationParser::FormatInvalidException => _e
+    @simulation.errors << { generation_source: 'is invalid' }
+    render :new
   end
 
   def destroy
@@ -42,7 +48,7 @@ class SimulationsController < ApplicationController
   private
 
   def simulation_params
-    params.require(:simulation).permit(:generation)
+    params.require(:simulation).permit(:generation_source)
   end
 
   def init_simulation
