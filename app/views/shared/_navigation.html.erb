@@ -7,31 +7,30 @@
     <div class="relative flex justify-between lg:gap-8 xl:grid xl:grid-cols-12">
       <div class="flex md:absolute md:inset-y-0 md:left-0 lg:static xl:col-span-2">
         <div class="flex flex-shrink-0 items-center">
-          <a href="#">
+          <%= link_to root_path do %>
             <img class="block h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-          </a>
+          <% end %>
         </div>
       </div>
       <div class="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6 py-8 w-full">
       </div>
       <div class="flex items-center md:absolute md:inset-y-0 md:right-0 lg:hidden">
         <!-- Mobile menu button -->
-        <button type="button" class="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+        <button type="button"
+                data-navigation-sidebar-target="button"
+                data-action="navigation-sidebar#toggle"
+                class="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                aria-expanded="false">
           <span class="sr-only">Open menu</span>
-          <!--
-            Icon when menu is closed.
-            Heroicon name: outline/bars-3
-            Menu open: "hidden", Menu closed: "block"
-          -->
-          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <svg
+            data-navigation-sidebar-target="button_icon_opened"
+            class="block h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-          <!--
-            Icon when menu is open.
-            Heroicon name: outline/x-mark
-            Menu open: "block", Menu closed: "hidden"
-          -->
-          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <svg
+            data-navigation-sidebar-target="button_icon_closed"
+            class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
@@ -70,7 +69,15 @@
   </div>
 
   <!-- Mobile menu, show/hide based on menu state. -->
-  <nav class="lg:hidden hidden bg-white shadow-sm" aria-label="Global">
+  <nav class="lg:hidden hidden bg-white shadow-sm" aria-label="Global"
+       data-controller="transition"
+       data-navigation-sidebar-target="sidebar"
+       data-transition-enter-active="transition ease-out duration-100"
+       data-transition-enter-from="transform opacity-0 scale-95"
+       data-transition-enter-to="transform opacity-100 scale-100"
+       data-transition-leave-active="transition ease-in duration-75"
+       data-transition-leave-from="transform opacity-100 scale-100"
+       data-transition-leave-to="transform opacity-0 scale-95">
     <div class="pb-3 pt-4">
       <div class="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
         <%= render Navigation::Mobile::UserInfo::Component.new user: current_user %>
