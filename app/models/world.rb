@@ -38,4 +38,8 @@ class World < ApplicationRecord
       end
     end
   end
+
+  def to_s
+    cells.collect { |cell| cell.alive? ? '*' : '.' }.in_groups_of(width).collect(&:join).join('\n')
+  end
 end

@@ -6,6 +6,21 @@ class SimulationJob < ApplicationJob
     return unless simulation.running?
 
     old_generation = simulation.latest_generation
+
+    if old_generation.empty?
+      simulation.update(running_at: nil)
+      return
+    end
+
+    if simulation.repeating?
+      simulation.repeated!
+    end
+
+    if simulation.repeated?
+      simulation.update(running_at: nil)
+      return
+    end
+
     new_generation = simulation.next!
     simulation.touch :latest_run_at
 
@@ -20,6 +35,6 @@ class SimulationJob < ApplicationJob
                                     partial: 'simulations/generation_number',
                                     target: "generation_number_simulation_#{simulation.id}"
 
-    SimulationJob.set(wait: 0.5.second).perform_later(simulation)
+    SimulationJob.set(wait: 0.5.seconds).perform_later(simulation)
   end
 end

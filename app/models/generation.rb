@@ -39,4 +39,8 @@ class Generation < ApplicationRecord
 
     new_world
   end
+
+  def empty?
+    cells.alive.empty?
+  end
 end

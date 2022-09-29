@@ -7,6 +7,7 @@ it:
 
     start:
       success: 'Simulazione avviata con successo.'
+      error: 'Non ci sono le condizioni necessarie per avviare la simulazione.'
 
     pause:
       success: 'Simulazione sospesa con successo.'

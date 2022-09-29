@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_16_093213) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_29_105026) do
   create_table "cells", force: :cascade do |t|
     t.integer "world_id", null: false
     t.integer "x"
@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_16_093213) do
     t.datetime "latest_run_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "generation_repeating_count", default: 0
   end
 
   create_table "users", force: :cascade do |t|

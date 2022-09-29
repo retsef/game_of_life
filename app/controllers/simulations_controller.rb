@@ -1,6 +1,6 @@
 class SimulationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_simulation, only: %i[show destroy start pause]
+  before_action :find_simulation, only: %i[show start pause]
   before_action :init_simulation, only: %i[new create]
 
   def index
@@ -10,6 +10,11 @@ class SimulationsController < ApplicationController
   def show; end
 
   def start
+    if @simulation.repeated?
+      flash[:alert] = t('.error')
+      return
+    end
+
     @simulation.touch :running_at
 
     SimulationJob.perform_now(@simulation)
@@ -26,17 +31,20 @@ class SimulationsController < ApplicationController
   def new; end
 
   def create
-    generation = GenerationParser.parse(simulation_params[:generation_source])
+    generation = GenerationParser.new.call(simulation_params[:generation_source])
 
-    if generation.update(simulation: @simulation)
+    if generation.failure?
+      flash[:alert] = t('.error')
+      render :new
+      return
+    end
+
+    if generation.value!.update(simulation: @simulation)
       redirect_to @simulation, notice: t('.success')
     else
       flash[:alert] = t('.error')
       render :new
     end
-  rescue StandardError => _e
-    flash[:alert] = t('.error')
-    render :new
   end
 
   private

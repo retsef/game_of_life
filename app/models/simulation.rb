@@ -27,4 +27,28 @@ class Simulation < ApplicationRecord
   def next!
     generations.create(number: (latest_generation_number + 1), world: latest_generation.next)
   end
+
+  def repeated?
+    generation_repeating_count > repeating_limit
+  end
+
+  def repeated!
+    update(generation_repeating_count: generation_repeating_count + 1)
+  end
+
+  def repeating?
+    return false if generations.size < 2
+
+    generations.limit(repeating_offset)
+               .collect { |generation| generation.world.to_s }
+               .uniq.size > 1
+  end
+
+  def repeating_offset
+    4
+  end
+
+  def repeating_limit
+    5
+  end
 end
