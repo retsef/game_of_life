@@ -39,9 +39,9 @@ class Simulation < ApplicationRecord
   def repeating?
     return false if generations.size < 2
 
-    generations.limit(repeating_offset)
+    generations.includes(world: :cells).limit(repeating_offset)
                .collect { |generation| generation.world.to_s }
-               .uniq.size > 1
+               .uniq.size < repeating_offset
   end
 
   def repeating_offset
