@@ -1,6 +1,6 @@
 class ErrorsController < ApplicationController
   protect_from_forgery with: :null_session
-  layout 'errors'
+  layout 'error'
 
   def not_found
     render status: :not_found
